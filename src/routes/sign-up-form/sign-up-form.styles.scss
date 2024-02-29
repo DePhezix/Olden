@@ -1,0 +1,45 @@
+.sign-up-Parent {
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .sign-up-container {
+    display: flex;
+    flex-direction: column;
+    width: 420px;
+    align-items: flex-start;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 1em;
+
+    h2 {
+      margin: 10px 8px;
+    }
+
+    span {
+      margin-left: 8px;
+    }
+
+    button {
+      transform: translateX(70%);
+    }
+
+    .signInLink {
+      text-decoration: underline;
+      color: blue;
+    }
+
+    .signInSpan {
+      transform: translate(100px, 5px);
+    }
+
+    form {
+      margin-left: 8px;
+      input {
+        width: 380px;
+      }
+    }
+  }
+}
