@@ -1,46 +1,56 @@
 import Navigation from "./routes/navigation/navigation.component";
 import SignUpForm from "./routes/sign-up-form/sign-up-form.component";
 import SignInForm from "./routes/sign-in-form/sign-in-form.component";
-import Home from './routes/home/home.component'
-import { useContext } from "react";
-import { UserContext } from "./contexts/user.context";
-import {Navigate, Routes, Route} from 'react-router-dom';
+import Home from "./routes/home/home.component";
 import Shop from "./routes/shop/shop.component";
+import Checkout from "./routes/checkout/checkout.component";
+
+import { Navigate, Routes, Route, useLocation } from "react-router-dom";
+import { useContext, useEffect } from "react";
+
+import { UserContext } from "./contexts/user.context";
+import { CartContext } from "./contexts/cart.context";
+import { UrlHistoryContext } from "./contexts/urlHistory.context";
 
 const App = () => {
   const { currentUser } = useContext(UserContext);
+  const { setisCartOpen } = useContext(CartContext);
+  const { urlHistory, setHistory } = useContext(UrlHistoryContext);
 
-  const VerifyUser = (optionNumber, Element, path) => {
-    if (optionNumber === 1) {
-      return currentUser ? Element :  <Navigate to={`/${path}`} replace />
+  const location = useLocation();
+
+  useEffect(() => {
+    setHistory(location.pathname);
+    setisCartOpen(false);
+  }, [location.pathname]);
+
+  function VerifyUser(VariationType, Page, Pathname) {
+    if (VariationType === 1) {
+      return currentUser && urlHistory[urlHistory.length - 1] != Pathname ? (
+        <Navigate to={`${urlHistory[urlHistory.length - 1]}`} replace />
+      ) : currentUser && urlHistory[urlHistory.length - 1] === Pathname ? (
+        <Navigate to='/home' replace />
+      ) : (
+        Page
+      );
+    } else if (VariationType === 2) {
+      return currentUser ? Page : <Navigate to="/" replace />;
     }
-    return currentUser ? <Navigate to="/home" /> : Element
-  };
+  }
 
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>
-        <Route
-          path="home"
-          element={
-           VerifyUser(1, <Home />, 'home')
-          }
-        />
-        <Route
-          path="shop"
-          element={VerifyUser(1, <Shop />, 'shop')}
-        />
-        <Route
-          index
-          element={
-            VerifyUser(2, <SignInForm />)
-          }
-        />
+        <Route path="home" element={VerifyUser(2, <Home />, "/home")} />
+        <Route path="shop" element={VerifyUser(2, <Shop />, "/shop")} />
+        <Route index element={VerifyUser(1, <SignInForm />, "/")} />
         <Route
           path="/signUp"
-          element={
-            VerifyUser(2, <SignUpForm />)
-          }
+          element={VerifyUser(1, <SignUpForm />, "/signUp")}
+        />
+        <Route
+          path="/checkout"
+          element={VerifyUser(2, <Checkout />, "/checkout")}
         />
       </Route>
     </Routes>

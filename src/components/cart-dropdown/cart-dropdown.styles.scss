@@ -11,6 +11,21 @@
   right: 20px;
   z-index: 5;
 
+  &.empty_cart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .trolley_svg {
+      width: 75px;
+      margin-bottom: 10px;
+    }
+
+    .no_items_label {
+      text-transform: uppercase;
+    }
+  }
+
   .empty-message {
     font-size: 18px;
     margin: 50px auto;

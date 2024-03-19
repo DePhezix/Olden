@@ -6,18 +6,21 @@ import {BrowserRouter} from 'react-router-dom'
 
 import { UserProvider } from './contexts/user.context'
 import { ProductsProvider } from './contexts/products.contexts'
-import { CartProvider } from './contexts/ToggleCart.context'
+import { CartProvider } from './contexts/cart.context'
+import { UrlHistoryProvider } from './contexts/urlHistory.context'
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <ProductsProvider>
-          <CartProvider>
-            <App />
-          </CartProvider>
-        </ProductsProvider>
+        <UrlHistoryProvider>
+          <ProductsProvider>
+            <CartProvider>
+              <App />
+            </CartProvider>
+          </ProductsProvider>
+        </UrlHistoryProvider>
       </UserProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
