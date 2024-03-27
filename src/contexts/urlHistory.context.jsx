@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const UrlHistoryContext = createContext({
   setUrlHistory: () => [],
@@ -6,12 +6,25 @@ export const UrlHistoryContext = createContext({
 });
 
 export function UrlHistoryProvider({ children }) {
-  const [urlHistory, setUrlHistory] = useState([]);
+  const [urlHistory, setUrlHistory] = useState(
+    localStorage.getItem("urlHistory").split(',')
+  );
   
   const setHistory = (new_location) =>
     urlHistory[urlHistory - 1] === new_location
       ? null
       : setUrlHistory([...urlHistory, new_location]);
+    
+    useEffect(() => {
+      if (urlHistory.length > 5) {
+        const last5ArraySlice = urlHistory.slice(urlHistory.length - 5);
+        setUrlHistory(last5ArraySlice)
+      }
+    }, [urlHistory])
+
+    useEffect(() => {
+      localStorage.setItem('urlHistory', urlHistory)
+    }, [urlHistory]);
 
   const value = { urlHistory, setHistory };
 
