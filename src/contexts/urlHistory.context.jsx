@@ -7,9 +7,9 @@ export const UrlHistoryContext = createContext({
 
 export function UrlHistoryProvider({ children }) {
   const [urlHistory, setUrlHistory] = useState(
-    localStorage.getItem("urlHistory").split(',')
+    sessionStorage.getItem("urlHistory") ? sessionStorage.getItem("urlHistory").split(',') : []
   );
-  
+
   const setHistory = (new_location) =>
     urlHistory[urlHistory - 1] === new_location
       ? null
@@ -23,7 +23,7 @@ export function UrlHistoryProvider({ children }) {
     }, [urlHistory])
 
     useEffect(() => {
-      localStorage.setItem('urlHistory', urlHistory)
+      sessionStorage.setItem('urlHistory', urlHistory)
     }, [urlHistory]);
 
   const value = { urlHistory, setHistory };
