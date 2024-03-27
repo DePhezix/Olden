@@ -7,7 +7,7 @@ import CheckoutItem from '../../components/checkout-item/checkout-item.component
 import Button from '../../components/button/button.component'
 import { ReactComponent as TrolleySVG } from '../../assets/trolley.svg'
  
-import './checkout.styleadd s.scss'
+import './checkout.styles.scss'
 
 function Checkout() {
   const { cartItems, cartTotal } = useContext(CartContext);

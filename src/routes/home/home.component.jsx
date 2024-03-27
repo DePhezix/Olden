@@ -1,39 +1,29 @@
+
+import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import Directory from '../../components/directory/directory.component';
+import { getHomeCategoriesandDocuments } from "../../utils/firebase/firebase.utils";
+
 
 const Home = () => {
-  const categories = [
-    {
-      id: 1,
-      title: 'hats',
-      imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
-    },
-    {
-      id: 2,
-      title: 'jackets',
-      imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
-    },
-    {
-      id: 3,
-      title: 'sneakers',
-      imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
-    },
-    {
-      id: 4,
-      title: 'womens',
-      imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
-    },
-    {
-      id: 5,
-      title: 'mens',
-      imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
-    },
-  ];
+  const [ homeCategoriesMap, setHomeCategoriesMap ] = useState([])
+
+  useEffect(() => {
+    const getHomeCategoriesMap = async () => {
+      const homeCategoryMap = await getHomeCategoriesandDocuments();
+      setHomeCategoriesMap(homeCategoryMap)
+    }
+
+    getHomeCategoriesMap()
+  }, [])
+
 
   return (
     <div>
-      <Directory categories={categories} />
+      <Directory
+        categories={homeCategoriesMap}
+      />
       <Outlet />
     </div>
   );

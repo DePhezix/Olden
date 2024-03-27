@@ -8,13 +8,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "components": "^0.1.0",
     "firebase": "^9.8.1",
     "firebase-tools": "^11.0.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
     "sass": "^1.52.1",
-    "styled-components": "^5.3.5",
+    "styled": "^1.0.0",
+    "styled-components": "^6.1.8",
     "vite-plugin-svgr": "^2.1.0"
   },
   "devDependencies": {

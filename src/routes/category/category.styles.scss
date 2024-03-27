@@ -1,0 +1,19 @@
+.complete-category-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;;
+
+    .category-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 20px;
+        row-gap: 50px;
+
+    }
+    
+    .title {
+        font-size: 38px;
+        margin: 15px 0;
+    }
+}

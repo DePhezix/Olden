@@ -6,7 +6,8 @@ import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
 
 import { Navigate, Routes, Route, useLocation } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect
+ } from "react";
 
 import { UserContext } from "./contexts/user.context";
 import { CartContext } from "./contexts/cart.context";
@@ -21,6 +22,9 @@ const App = () => {
 
   useEffect(() => {
     setHistory(location.pathname);
+  }, [location.pathname]);
+  
+  useEffect(() => {
     setisCartOpen(false);
   }, [location.pathname]);
 
@@ -42,7 +46,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Navigation />}>
         <Route path="home" element={VerifyUser(2, <Home />, "/home")} />
-        <Route path="shop" element={VerifyUser(2, <Shop />, "/shop")} />
+        <Route path="shop/*" element={VerifyUser(2, <Shop />, "/shop")} />
         <Route index element={VerifyUser(1, <SignInForm />, "/")} />
         <Route
           path="/signUp"
