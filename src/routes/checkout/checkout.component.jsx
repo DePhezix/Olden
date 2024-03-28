@@ -14,8 +14,6 @@ function Checkout() {
 
   const navigate = useNavigate()
 
-  console.log(cartItems)
-
   return (
     <div className="checkout-container">
       {cartItems.length >= 1 ? (
