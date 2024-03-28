@@ -5,13 +5,13 @@ import Home from "./routes/home/home.component";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
 
-import { Navigate, Routes, Route, useLocation } from "react-router-dom";
-import { useContext, useEffect
- } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { useContext, useEffect } from "react";
 
-import { UserContext } from "./contexts/user.context";
+import { UserContext, UserRedirect } from "./contexts/user.context";
 import { CartContext } from "./contexts/cart.context";
 import { UrlHistoryContext } from "./contexts/urlHistory.context";
+import PageNotFound from "./routes/page_not_found/page-not-found.components";
 
 const App = () => {
   const { currentUser } = useContext(UserContext);
@@ -23,38 +23,36 @@ const App = () => {
   useEffect(() => {
     setHistory(location.pathname);
   }, [location.pathname]);
-  
+
   useEffect(() => {
     setisCartOpen(false);
   }, [location.pathname]);
 
-  function VerifyUser(VariationType, Page, Pathname) {
-    if (VariationType === 1) {
-      return currentUser && urlHistory[urlHistory.length - 1] != Pathname ? (
-        <Navigate to={`${urlHistory[urlHistory.length - 1]}`} replace />
-      ) : currentUser && urlHistory[urlHistory.length - 1] === Pathname ? (
-        <Navigate to='/home' replace />
-      ) : (
-        Page
-      );
-    } else if (VariationType === 2) {
-      return currentUser ? Page : <Navigate to="/" replace />;
-    }
-  }
+  const Type1UserRedirect = (element, path) => {
+    return UserRedirect(1, element, path, currentUser, urlHistory);
+  };
+
+  const Type2UserRedirect = (element, path) => {
+    return UserRedirect(2, element, path, currentUser, urlHistory);
+  };
 
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>
-        <Route path="home" element={VerifyUser(2, <Home />, "/home")} />
-        <Route path="shop/*" element={VerifyUser(2, <Shop />, "/shop")} />
-        <Route index element={VerifyUser(1, <SignInForm />, "/")} />
+        <Route path="home" element={Type2UserRedirect(<Home />, "/home")} />
+        <Route path="shop/*" element={Type2UserRedirect(<Shop />, "/shop")} />
+        <Route index element={Type1UserRedirect(<SignInForm />, "/")} />
         <Route
           path="/signUp"
-          element={VerifyUser(1, <SignUpForm />, "/signUp")}
+          element={Type1UserRedirect(<SignUpForm />, "/signUp")}
         />
         <Route
           path="/checkout"
-          element={VerifyUser(2, <Checkout />, "/checkout")}
+          element={Type2UserRedirect(<Checkout />, "/checkout")}
+        />
+        <Route
+          path="*"
+          element={Type2UserRedirect(<PageNotFound />)}
         />
       </Route>
     </Routes>
