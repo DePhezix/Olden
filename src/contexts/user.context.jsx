@@ -23,7 +23,9 @@ export const UserContext = createContext({
 
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const value = { currentUser, setCurrentUser };
+  const redirect = UserRedirect
+  
+  const value = { currentUser, setCurrentUser, redirect };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {

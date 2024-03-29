@@ -8,13 +8,13 @@ import Checkout from "./routes/checkout/checkout.component";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useContext, useEffect } from "react";
 
-import { UserContext, UserRedirect } from "./contexts/user.context";
+import { UserContext } from "./contexts/user.context";
 import { CartContext } from "./contexts/cart.context";
 import { UrlHistoryContext } from "./contexts/urlHistory.context";
 import PageNotFound from "./routes/page_not_found/page-not-found.components";
 
 const App = () => {
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, redirect } = useContext(UserContext);
   const { setisCartOpen } = useContext(CartContext);
   const { urlHistory, setHistory } = useContext(UrlHistoryContext);
 
@@ -28,12 +28,14 @@ const App = () => {
     setisCartOpen(false);
   }, [location.pathname]);
 
+  
+
   const Type1UserRedirect = (element, path) => {
-    return UserRedirect(1, element, path, currentUser, urlHistory);
+    return redirect(1, element, path, currentUser, urlHistory);
   };
 
   const Type2UserRedirect = (element, path) => {
-    return UserRedirect(2, element, path, currentUser, urlHistory);
+    return redirect(2, element, path, currentUser, urlHistory);
   };
 
   return (
