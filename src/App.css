@@ -12,9 +12,9 @@ code {
 
 a {
   text-decoration: none;
-  color: black;
 }
 
 * {
   box-sizing: border-box;
+  color: #401F71 !important;
 }

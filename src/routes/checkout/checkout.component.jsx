@@ -42,9 +42,8 @@ function Checkout() {
         </>
       ) : (
         <div className='empty-checkout-container'>
-          <TrolleySVG />
-          <span>Empty Checkout</span>
-          <Button onClick={() => navigate("/shop")}>Go Shopping?</Button>
+          <span>Your Checkout is Empty!</span>
+          <Button onClick={() => navigate("/shop")} >Return to shop?</Button>
         </div>
       )}
     </div>

@@ -7,7 +7,7 @@ import { CartContext } from "../../contexts/cart.context";
 import CartIcon from '../../components/cart-icon/cart-icon.component';
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 
-import { ReactComponent as CrwnLogo } from '../../assets/crown.svg';
+import { ReactComponent as OldenLogo } from '../../assets/olden.svg';
 import { signOutUser } from '../../utils/firebase/firebase.utils';
 
 import './navigation.styles.scss';
@@ -24,11 +24,11 @@ const Navigation = () => {
     <Fragment>
       <div className="navigation">
         <Link className="logo-container" to={currentUser ? "/home" : "/"}>
-          <CrwnLogo className="logo" />
+          <div className="logo">The Olden</div>
         </Link>
         <div className="nav-links-container">
           <Link className="nav-link" to="/shop">
-            SHOP
+            COLLECTIONS
           </Link>
           {currentUser ? (
             <span className="nav-link" onClick={signOutHandler}>
@@ -44,7 +44,6 @@ const Navigation = () => {
         </div>
         {isCartOpen && <CartDropdown />}
       </div>
-      <Outlet />
     </Fragment>
   );
 };

@@ -6,11 +6,6 @@ body {
   padding: 10px 20px;
 }
 
-*{
-  -ms-overflow-style: none;  
-  scrollbar-width: none;  
-  user-select: none;
-}
 
 *::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
@@ -28,4 +23,8 @@ a {
 
 * {
   box-sizing: border-box;
+    -ms-overflow-style: none;  
+  scrollbar-width: none;  
+  user-select: none;
+  color: #401F71 !important;
 }

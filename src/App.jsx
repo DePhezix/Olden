@@ -1,10 +1,10 @@
-import Navigation from "./routes/navigation/navigation.component";
+import Layout from './components/Layout/layout.component'
+
 import SignUpForm from "./routes/sign-up-form/sign-up-form.component";
 import SignInForm from "./routes/sign-in-form/sign-in-form.component";
 import Home from "./routes/home/home.component";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
-
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useContext, useEffect } from "react";
 
@@ -28,8 +28,6 @@ const App = () => {
     setisCartOpen(false);
   }, [location.pathname]);
 
-  
-
   const Type1UserRedirect = (element, path) => {
     return redirect(1, element, path, currentUser, urlHistory);
   };
@@ -40,9 +38,12 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Navigation />}>
+      <Route path="/" element={<Layout />}>
         <Route path="home" element={Type2UserRedirect(<Home />, "/home")} />
-        <Route path="shop/*" element={Type2UserRedirect(<Shop />, "/shop")} />
+        <Route
+          path="shop/*"
+          element={Type2UserRedirect(<Shop />, "/shop")}
+        />
         <Route index element={Type1UserRedirect(<SignInForm />, "/")} />
         <Route
           path="/signUp"
@@ -52,10 +53,7 @@ const App = () => {
           path="/checkout"
           element={Type2UserRedirect(<Checkout />, "/checkout")}
         />
-        <Route
-          path="*"
-          element={Type2UserRedirect(<PageNotFound />)}
-        />
+        <Route path="*" element={Type2UserRedirect(<PageNotFound />)} />
       </Route>
     </Routes>
   );

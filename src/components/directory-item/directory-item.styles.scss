@@ -1,11 +1,11 @@
 .directory-item-container {
   min-width: 30%;
-  height: 240px;
+  height: 300px;
   flex: 1 1 auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
+  border: 1px solid #401F71;
   margin: 0 7.5px 15px;
   overflow: hidden;
 
@@ -48,7 +48,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
+    border: 1px solid #401F71;
     background-color: white;
     opacity: 0.7;
     position: absolute;
