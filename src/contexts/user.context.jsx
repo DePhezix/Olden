@@ -1,15 +1,27 @@
 import { createContext, useEffect, useReducer } from "react";
-import { onAuthStateChangedListener, createUserDocumentFromAuth } from "../utils/firebase/firebase.utils";
-import { Navigate } from 'react-router-dom'
+import {
+  onAuthStateChangedListener,
+  createUserDocumentFromAuth,
+} from "../utils/firebase/firebase.utils";
+import { Navigate } from "react-router-dom";
 
 import { createAction } from "../utils/reducer/reducer.utils";
 
-export const UserRedirect = (VariationType, Page, Pathname, currentUser, urlHistory) => {
+export const UserRedirect = (
+  VariationType,
+  Page,
+  Pathname,
+  currentUser,
+  urlHistory,
+  pageType
+) => {
   if (VariationType === 1) {
     return currentUser && urlHistory[urlHistory.length - 1] != Pathname ? (
       <Navigate to={`${urlHistory[urlHistory.length - 1]}`} />
     ) : currentUser && urlHistory[urlHistory.length - 1] === Pathname ? (
       <Navigate to="/home" replace />
+    ) : pageType === "PageNotFound" && currentUser ? (
+      <Navigate to={`${urlHistory[urlHistory.length - 2]}`} />
     ) : (
       Page
     );
@@ -21,8 +33,7 @@ export const UserRedirect = (VariationType, Page, Pathname, currentUser, urlHist
 export const UserContext = createContext({
   setCurrentUser: () => null,
   currentUser: null,
-  redirect: (VariationType, Page, Pathname, currentUser, urlHistory) =>
-    UserRedirect(VariationType, Page, Pathname, currentUser, urlHistory),
+  redirect: UserRedirect,
 });
 
 export const USER_ACTION_TYPES = {
@@ -30,28 +41,28 @@ export const USER_ACTION_TYPES = {
 };
 
 const userReducer = (state, action) => {
-  const { type, payload } = action
+  const { type, payload } = action;
 
-  switch(type) {
+  switch (type) {
     case USER_ACTION_TYPES.SET_CURRENT_USER:
       return {
         ...state,
-        currentUser: payload
-      }
+        currentUser: payload,
+      };
     default:
-      throw new Error(`Unhandled type: ${type}` )
+      throw new Error(`Unhandled type: ${type}`);
   }
-}
+};
 
 const INITIAL_STATE = {
-  currentUser: null
-}
+  currentUser: null,
+};
 
 export const UserProvider = ({ children }) => {
-  const [ { currentUser },  dispatch] = useReducer(userReducer, INITIAL_STATE)
+  const [{ currentUser }, dispatch] = useReducer(userReducer, INITIAL_STATE);
   const setCurrentUser = (user) => {
-    dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user))
-  }
+    dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user));
+  };
 
   const redirect = UserRedirect;
 
