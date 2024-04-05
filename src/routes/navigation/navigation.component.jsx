@@ -1,5 +1,5 @@
 import { Fragment, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { UserContext } from '../../contexts/user.context';
 import { CartContext } from "../../contexts/cart.context";
@@ -14,6 +14,7 @@ import './navigation.styles.scss';
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
+  const location = useLocation()
 
   const signOutHandler = async () => {
     await signOutUser();
@@ -34,9 +35,13 @@ const Navigation = () => {
               {" "}
               SIGN OUT{" "}
             </span>
-          ) : (
+          ) : location.pathname !== "/" ? (
             <Link className="nav-link" to="/">
               SIGN IN
+            </Link>
+          ) : (
+            <Link className="nav-link" to="/signUp">
+              SIGN UP
             </Link>
           )}
           <CartIcon />

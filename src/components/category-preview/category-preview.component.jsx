@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import "./category-preview.styless.scss";
 
 function CategoryPreview({title, products}) {
-
   return (
     <div className="category-preview-container">
         <h2>

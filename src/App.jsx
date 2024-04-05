@@ -15,7 +15,7 @@ import PageNotFound from "./routes/page_not_found/page-not-found.components";
 
 const App = () => {
   const { currentUser, redirect } = useContext(UserContext);
-  const { setisCartOpen } = useContext(CartContext);
+  const { setisCartOpen, isCartOpen } = useContext(CartContext);
   const { urlHistory, setHistory } = useContext(UrlHistoryContext);
 
   const location = useLocation();
@@ -25,7 +25,9 @@ const App = () => {
   }, [location.pathname]);
 
   useEffect(() => {
+    if (isCartOpen) {
     setisCartOpen(false);
+    }
   }, [location.pathname]);
 
   const Type1UserRedirect = (element, path) => {

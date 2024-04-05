@@ -21,6 +21,7 @@ function Footer() {
       html.offsetHeight
     );
 
+
     setContentEnough(contentHeight > windowHeight);
   }, [location.pathname]);
 

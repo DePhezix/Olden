@@ -11,11 +11,13 @@ import "./category.styles.scss";
 function Category() {
   const { category } = useParams();
   const { categoriesMap } = useContext(CategoriesContext);
-  const [products, setProducts] = useState(categoriesMap[category]);
+  const [products, setProducts] = useState([]);
   const { pathname } = useLocation();
 
   useEffect(() => {
-    setProducts(categoriesMap[category]);
+    if (Object.keys(categoriesMap).length >= 1) {
+      setProducts(categoriesMap[category][3]);
+    }
   }, [category, categoriesMap]);
 
   useEffect(() => {
