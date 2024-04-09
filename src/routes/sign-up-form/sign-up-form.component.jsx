@@ -21,6 +21,7 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password } = formFields;
+  const isAdmin = false
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -84,15 +85,6 @@ const SignUpForm = () => {
             name="password"
             value={password}
           />
-
-          {/* <FormInput
-            label="Confirm Password"
-            type="password"
-            required
-            onChange={handleChange}
-            name="confirmPassword"
-            value={confirmPassword}
-          /> */}
           <Button type="submit">Sign Up</Button>
         </form>
         <span className='signInSpan'>Already Have An Account? Sign In <Link to='/' className='signInLink' >Here</Link></span>

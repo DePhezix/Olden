@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 import {
   getAuth,
   signInWithRedirect,
@@ -8,8 +8,17 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-} from 'firebase/auth';
-import { getFirestore, doc, getDoc, setDoc, collection, writeBatch, query, getDocs } from 'firebase/firestore';
+} from "firebase/auth";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDBCj_5VucWua0H-2nk7Vc9xH_oY3lLjSs",
@@ -35,34 +44,80 @@ export const signInWithGoogleRedirect = () =>
 
 export const db = getFirestore();
 
-export const addCollectionAndDocuments = async (collectionkey, objectsToAdd, field) => {
-  const collectionRef = collection(db, collectionkey)
-  const batch = writeBatch(db)
+export const addCollectionAndDocuments = async (
+  collectionkey,
+  objectsToAdd,
+  field
+) => {
+  const collectionRef = collection(db, collectionkey);
+  const batch = writeBatch(db);
 
   objectsToAdd.forEach((object) => {
-    const docRef = doc(collectionRef, object[field].toLowerCase())
-    batch.set(docRef, object)
-  })
+    const docRef = doc(collectionRef, object[field].toLowerCase());
+    batch.set(docRef, object);
+  });
 
-  await batch.commit()
-  console.log('done')
-}
+  await batch.commit();
+  console.log("done");
+};
+
+export const addCollectionToFirebase = async (
+  collectionName,
+  objectToAdd,
+  documentName
+) => {
+  const collectionRef = collection(db, collectionName);
+  const docRef = doc(collectionRef, documentName.toLowerCase());
+  const batch = writeBatch(db);
+
+  batch.set(docRef, objectToAdd);
+  await batch.commit();
+};
 
 export const getCategoriesAndDocuments = async () => {
-  const collectionRef = collection(db, 'categories')
-  
-  const q = query(collectionRef)
-  const querySnapshot = await getDocs(q)
+  const collectionRef = collection(db, "categories");
 
+  const q = query(collectionRef);
+  const querySnapshot = await getDocs(q);
 
   const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    const { title, id, imageUrl, route, items } = docSnapshot.data()
+    const { title, id, imageUrl, route, items } = docSnapshot.data();
     acc[title.toLowerCase()] = [id, imageUrl, route, items];
     return acc;
-  }, {})
+  }, {});
 
-  return categoryMap
+  return categoryMap;
+};
+
+export const getCurrentUserInfo = async (currenUserUID) => {
+   const userDocRef = doc(db, "users", currenUserUID);
+   const userSnapshot = await getDoc(userDocRef);
+   if (userSnapshot.exists()) {
+      return userSnapshot.data()
+   }
 }
+
+export const getUsersInfo = async () => {
+  const collectionRef = collection(db, "users");
+
+  const q = query(collectionRef);
+  const querySnapshot = await getDocs(q);
+
+  const userMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    const { isAdmin, createdAt, displayName, email } =
+    docSnapshot.data();
+    
+    acc[email] = {
+      isAdmin: isAdmin,
+      createdAt: createdAt,
+      displayName: displayName,
+    };
+
+    return acc;
+  }, {});
+
+  return userMap;
+};
 
 export const createUserDocumentFromAuth = async (
   userAuth,
@@ -75,7 +130,7 @@ export const createUserDocumentFromAuth = async (
   const userSnapshot = await getDoc(userDocRef);
 
   if (!userSnapshot.exists()) {
-    const { displayName, email } = userAuth;
+    const { displayName, email, uid } = userAuth;
     const createdAt = new Date();
 
     try {
@@ -83,6 +138,8 @@ export const createUserDocumentFromAuth = async (
         displayName,
         email,
         createdAt,
+        uid,
+        isAdmin: false,
         ...additionalInformation,
       });
     } catch (error) {

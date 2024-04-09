@@ -12,6 +12,7 @@ import { UserContext } from "./contexts/user.context";
 import { CartContext } from "./contexts/cart.context";
 import { UrlHistoryContext } from "./contexts/urlHistory.context";
 import PageNotFound from "./routes/page_not_found/page-not-found.components";
+import Admin from './routes/admin/admin.component';
 
 const App = () => {
   const { currentUser, redirect } = useContext(UserContext);
@@ -52,6 +53,7 @@ const App = () => {
           path="/checkout"
           element={Type2UserRedirect(<Checkout />, "/checkout")}
         />
+        <Route path="/admin" element={Type2UserRedirect(<Admin />, "/admin")} />
         <Route
           path="/page_not_found"
           element={

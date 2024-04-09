@@ -2,6 +2,8 @@ import { createContext, useEffect, useReducer } from "react";
 import {
   onAuthStateChangedListener,
   createUserDocumentFromAuth,
+  getUsersInfo,
+  getCurrentUserInfo,
 } from "../utils/firebase/firebase.utils";
 import { Navigate } from "react-router-dom";
 
@@ -34,10 +36,14 @@ export const UserContext = createContext({
   setCurrentUser: () => null,
   currentUser: null,
   redirect: UserRedirect,
+  allUsersData: {},
+  isUserAdmin: false,
 });
 
 export const USER_ACTION_TYPES = {
   SET_CURRENT_USER: "SET_CURRENT_USER",
+  SET_ALL_USERS_DATA: "SET_ALL_USERS_DATA",
+  SET_IS_USER_ADMIN: "SET_IS_USER_ADMIN",
 };
 
 const userReducer = (state, action) => {
@@ -47,7 +53,12 @@ const userReducer = (state, action) => {
     case USER_ACTION_TYPES.SET_CURRENT_USER:
       return {
         ...state,
-        currentUser: payload,
+        ...payload
+      };
+    case USER_ACTION_TYPES.SET_ALL_USERS_DATA:
+      return {
+        ...state,
+        allUsersData: payload,
       };
     default:
       throw new Error(`Unhandled type: ${type}`);
@@ -56,28 +67,67 @@ const userReducer = (state, action) => {
 
 const INITIAL_STATE = {
   currentUser: null,
+  isUserAdmin: false,
+  allUsersData: {},
 };
 
 export const UserProvider = ({ children }) => {
-  const [{ currentUser }, dispatch] = useReducer(userReducer, INITIAL_STATE);
-  const setCurrentUser = (user) => {
-    dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, user));
-  };
-
   const redirect = UserRedirect;
+  const [{ currentUser, allUsersData, isUserAdmin }, dispatch] = useReducer(
+    userReducer,
+    INITIAL_STATE
+  );
 
-  const value = { currentUser, setCurrentUser, redirect };
+  const updateUserinReducer = (newCurrentUser) => {
+    const isNewUserAdmin = () => {
+      if (newCurrentUser.isAdmin === true) {
+        return true
+      } else {
+        return false
+      }
+    }
+    const payload = {
+      currentUser: newCurrentUser,
+      isUserAdmin: isNewUserAdmin(),
+    };
+
+    dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, payload))
+  }
+
+  useEffect(() => {
+    if (isUserAdmin) {
+      const getAllUsersData = async () => {
+        const usersData = await getUsersInfo();
+
+        dispatch(createAction(USER_ACTION_TYPES.SET_ALL_USERS_DATA, usersData));
+      };
+
+      getAllUsersData();
+    }
+  }, [isUserAdmin]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
       if (user) {
         createUserDocumentFromAuth(user);
       }
-      setCurrentUser(user);
-    });
+      const getCurrentUserData = async () => {
+        const userData = await getCurrentUserInfo(user.uid);
 
+        updateUserinReducer(userData)
+      };
+
+      getCurrentUserData();
+    });
     return unsubscribe;
   }, []);
+
+  const value = {
+    currentUser,
+    allUsersData,
+    isUserAdmin,
+    redirect,
+  };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };

@@ -1,22 +1,13 @@
 
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import Directory from '../../components/directory/directory.component';
-import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
+import { CategoriesContext } from '../../contexts/categories.contexts';
 
 
 const Home = () => {
-  const [ categoriesMap, setCategoriesMap ] = useState([])
-
-  useEffect(() => {
-    const getCategoriesMap = async () => {
-      const categoryMap = await getCategoriesAndDocuments();
-      setCategoriesMap(categoryMap)
-    }
-
-    getCategoriesMap()
-  }, [])
+  const { categoriesMap } = useContext(CategoriesContext);
 
   return (
     <div>

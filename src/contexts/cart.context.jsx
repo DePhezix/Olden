@@ -51,8 +51,6 @@ export const CartContext = createContext({
 const CART_ACTION_TYPES = {
   SET_IS_CART_OPEN: "setIsCartOpen",
   SET_CART_ITEMS: "setCartItems",
-  SET_CART_COUNT: "setCartCount",
-  SET_CART_TOTAL: "setCartTotal",
 };
 
 const INITIAL_STATE = {

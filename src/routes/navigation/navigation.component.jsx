@@ -1,20 +1,21 @@
-import { Fragment, useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Fragment, useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-import { UserContext } from '../../contexts/user.context';
+import { UserContext } from "../../contexts/user.context";
 import { CartContext } from "../../contexts/cart.context";
 
-import CartIcon from '../../components/cart-icon/cart-icon.component';
-import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
+import CartIcon from "../../components/cart-icon/cart-icon.component";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 
-import { signOutUser } from '../../utils/firebase/firebase.utils';
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 
-import './navigation.styles.scss';
+import "./navigation.styles.scss";
 
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, isUserAdmin } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
-  const location = useLocation()
+
+  const location = useLocation();
 
   const signOutHandler = async () => {
     await signOutUser();
@@ -30,6 +31,11 @@ const Navigation = () => {
           <Link className="nav-link" to="/shop">
             COLLECTIONS
           </Link>
+          {isUserAdmin && (
+            <Link className="nav-link" to="/admin">
+              ADMIN
+            </Link>
+          )}
           {currentUser ? (
             <span className="nav-link" onClick={signOutHandler}>
               {" "}
