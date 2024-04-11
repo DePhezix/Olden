@@ -18,7 +18,6 @@ const App = () => {
   const { currentUser, redirect } = useContext(UserContext);
   const { setisCartOpen, isCartOpen } = useContext(CartContext);
   const { urlHistory, setHistory } = useContext(UrlHistoryContext);
-
   const location = useLocation();
 
   useEffect(() => {
@@ -32,11 +31,11 @@ const App = () => {
   }, [location.pathname]);
 
   const Type1UserRedirect = (element, path, pageType) => {
-    return redirect(1, element, path, currentUser, urlHistory, pageType);
+    return redirect(1, element, path, currentUser.uid, urlHistory, pageType);
   };
 
   const Type2UserRedirect = (element, path, pageType) => {
-    return redirect(2, element, path, currentUser, urlHistory, pageType);
+    return redirect(2, element, path, currentUser.uid, urlHistory, pageType);
   };
 
   return (

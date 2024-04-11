@@ -33,17 +33,20 @@ export const UserRedirect = (
 };
 
 export const UserContext = createContext({
-  setCurrentUser: () => null,
-  currentUser: null,
+  currentUser: {
+    createdAt: null,
+    email: null,
+    displayName: null,
+    uid: null,
+    isAdmin: false,
+  },
   redirect: UserRedirect,
   allUsersData: {},
-  isUserAdmin: false,
 });
 
 export const USER_ACTION_TYPES = {
   SET_CURRENT_USER: "SET_CURRENT_USER",
   SET_ALL_USERS_DATA: "SET_ALL_USERS_DATA",
-  SET_IS_USER_ADMIN: "SET_IS_USER_ADMIN",
 };
 
 const userReducer = (state, action) => {
@@ -53,7 +56,7 @@ const userReducer = (state, action) => {
     case USER_ACTION_TYPES.SET_CURRENT_USER:
       return {
         ...state,
-        ...payload
+        currentUser: payload
       };
     case USER_ACTION_TYPES.SET_ALL_USERS_DATA:
       return {
@@ -66,45 +69,35 @@ const userReducer = (state, action) => {
 };
 
 const INITIAL_STATE = {
-  currentUser: null,
-  isUserAdmin: false,
+  currentUser: {
+    createdAt: null,
+    email: null,
+    displayName: null,
+    uid: null,
+    isAdmin: false,
+  },
   allUsersData: {},
 };
 
 export const UserProvider = ({ children }) => {
   const redirect = UserRedirect;
-  const [{ currentUser, allUsersData, isUserAdmin }, dispatch] = useReducer(
+  const [{ currentUser, allUsersData }, dispatch] = useReducer(
     userReducer,
     INITIAL_STATE
   );
 
-  const updateUserinReducer = (newCurrentUser) => {
-    const isNewUserAdmin = () => {
-      if (newCurrentUser.isAdmin === true) {
-        return true
-      } else {
-        return false
-      }
-    }
-    const payload = {
-      currentUser: newCurrentUser,
-      isUserAdmin: isNewUserAdmin(),
-    };
-
-    dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, payload))
-  }
-
   useEffect(() => {
-    if (isUserAdmin) {
-      const getAllUsersData = async () => {
-        const usersData = await getUsersInfo();
+      const isUserAdmin = currentUser.isAdmin;
+      if (isUserAdmin) {
+        const getAllUsersData = async () => {
+          const usersData = await getUsersInfo();
 
-        dispatch(createAction(USER_ACTION_TYPES.SET_ALL_USERS_DATA, usersData));
-      };
+          dispatch(createAction(USER_ACTION_TYPES.SET_ALL_USERS_DATA, usersData));
+        };
 
-      getAllUsersData();
-    }
-  }, [isUserAdmin]);
+        getAllUsersData();
+      }
+  }, [currentUser]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
@@ -114,7 +107,7 @@ export const UserProvider = ({ children }) => {
       const getCurrentUserData = async () => {
         const userData = await getCurrentUserInfo(user.uid);
 
-        updateUserinReducer(userData)
+        dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, userData));
       };
 
       getCurrentUserData();
@@ -125,7 +118,6 @@ export const UserProvider = ({ children }) => {
   const value = {
     currentUser,
     allUsersData,
-    isUserAdmin,
     redirect,
   };
 

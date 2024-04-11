@@ -12,7 +12,7 @@ import { signOutUser } from "../../utils/firebase/firebase.utils";
 import "./navigation.styles.scss";
 
 const Navigation = () => {
-  const { currentUser, isUserAdmin } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
 
   const location = useLocation();
@@ -31,12 +31,12 @@ const Navigation = () => {
           <Link className="nav-link" to="/shop">
             COLLECTIONS
           </Link>
-          {isUserAdmin && (
+          {currentUser.isAdmin && (
             <Link className="nav-link" to="/admin">
               ADMIN
             </Link>
           )}
-          {currentUser ? (
+          {currentUser.uid ? (
             <span className="nav-link" onClick={signOutHandler}>
               {" "}
               SIGN OUT{" "}
