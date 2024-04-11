@@ -32,6 +32,7 @@ export const UserRedirect = (
   }
 };
 
+
 export const UserContext = createContext({
   currentUser: {
     createdAt: null,
@@ -105,7 +106,7 @@ export const UserProvider = ({ children }) => {
         createUserDocumentFromAuth(user);
       }
       const getCurrentUserData = async () => {
-        const userData = await getCurrentUserInfo(user.uid);
+        const userData = await getCurrentUserInfo(user ? user.uid : null);
 
         dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, userData));
       };

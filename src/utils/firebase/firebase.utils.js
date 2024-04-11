@@ -90,11 +90,22 @@ export const getCategoriesAndDocuments = async () => {
 };
 
 export const getCurrentUserInfo = async (currenUserUID) => {
-   const userDocRef = doc(db, "users", currenUserUID);
-   const userSnapshot = await getDoc(userDocRef);
-   if (userSnapshot.exists()) {
-      return userSnapshot.data()
-   }
+  if (currenUserUID) {
+    const userDocRef = doc(db, "users", currenUserUID);
+    const userSnapshot = await getDoc(userDocRef);
+    if (userSnapshot.exists()) {
+      return userSnapshot.data();
+    }
+  } else {
+    const noUserObj = {
+      createdAt: null,
+      email: null,
+      displayName: null,
+      uid: null,
+      isAdmin: false,
+    };
+    return noUserObj
+  }
 }
 
 export const getUsersInfo = async () => {
