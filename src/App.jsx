@@ -30,13 +30,17 @@ const App = () => {
     }
   }, [location.pathname]);
 
-  const Type1UserRedirect = (element, path, pageType) => {
-    return redirect(1, element, path, currentUser.uid, urlHistory, pageType);
+  const Type1UserRedirect = (element, path) => {
+    return redirect(1, element, path, currentUser.uid, urlHistory, '/home', '/');
   };
 
-  const Type2UserRedirect = (element, path, pageType) => {
-    return redirect(2, element, path, currentUser.uid, urlHistory, pageType);
+  const Type2UserRedirect = (element, path) => {
+    return redirect(2, element, path, currentUser.uid, urlHistory, '/home', '/');
   };
+
+  const Type3UserRedirect = (element, path, unrestricted) => {
+    return redirect(3, element, path, currentUser.uid, urlHistory, '/home', '/', unrestricted);
+  }
 
   return (
     <Routes>
@@ -52,7 +56,7 @@ const App = () => {
           path="/checkout"
           element={Type2UserRedirect(<Checkout />, "/checkout")}
         />
-        <Route path="/admin" element={Type2UserRedirect(<Admin />, "/admin")} />
+        <Route path="/admin" element={Type3UserRedirect(<Admin />, "/admin", currentUser.isAdmin)} />
         <Route
           path="/page_not_found"
           element={

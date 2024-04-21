@@ -6,6 +6,15 @@
   align-items: center;
   margin-bottom: 10px;
 
+  input {
+      font-family: 'Open Sans Condensed', sans-serif;
+      font-weight: 600;
+  }
+
+  input[type="password"] {
+    letter-spacing: 1px;
+  }
+
   .sign-in-container {
     display: flex;
     flex-direction: column;

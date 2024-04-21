@@ -1,26 +1,16 @@
-import {  useContext } from "react";
+import { ReactComponent as SearchIcon } from "../../assets/search.svg";
 
-import { CategoriesContext } from '../../contexts/categories.contexts';
-import { UserContext } from '../../contexts/user.context';
+import "./admin.styles.scss";
 
-import './admin.styles.scss'
+import UserSectionForAdmin from "../../components/user-section-admin/user-section-admin.component";
+import ProductCategoriesSectionForAdmin from "../../components/product-categories-section-admin/product-categories-section-admin.components";
 
 function Admin() {
-  const { categoriesMap } = useContext(CategoriesContext)
-  const { allUsersData, currentUser } = useContext(UserContext);
 
   return (
-    <div>
-      <div>
-        <h1>Categories</h1>
-
-      </div>
-      <div>
-        <h1>Users</h1>
-        {Object.keys(allUsersData).forEach((userData) => {
-          
-        })}
-      </div>
+    <div className="admin-container">
+      <ProductCategoriesSectionForAdmin />
+      <UserSectionForAdmin />
     </div>
   );
 }

@@ -3,10 +3,8 @@ import { useState } from "react";
 import FormInput from "../../components/form-input/form-input.component";
 import Button from "../../components/button/button.component";
 
-import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
-} from "../../utils/firebase/firebase.utils";
+import { createAuthUserWithEmailAndPassword } from "../../utils/firebase/firebase-auth.utils";
+import { getUserDocument } from "../../utils/firebase/firestore.utils";
 
 import { Link } from "react-router-dom";
 
@@ -21,7 +19,6 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password } = formFields;
-  const isAdmin = false
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -36,7 +33,7 @@ const SignUpForm = () => {
         password
       );
 
-      await createUserDocumentFromAuth(user, { displayName });
+      await getUserDocument(user, { displayName });
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
@@ -54,7 +51,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="sign-up-Parent" >
+    <div className="sign-up-Parent">
       <div className="sign-up-container">
         <h2>Don't have an account?</h2>
         <span>Sign up with your email and password</span>
@@ -87,7 +84,12 @@ const SignUpForm = () => {
           />
           <Button type="submit">Sign Up</Button>
         </form>
-        <span className='signInSpan'>Already Have An Account? Sign In <Link to='/' className='signInLink' >Here</Link></span>
+        <span className="signInSpan">
+          Already Have An Account? Sign In{" "}
+          <Link to="/" className="signInLink">
+            Here
+          </Link>
+        </span>
       </div>
     </div>
   );

@@ -10,7 +10,9 @@
   "dependencies": {
     "components": "^0.1.0",
     "firebase": "^9.8.1",
+    "firebase-admin": "^12.1.0",
     "firebase-tools": "^11.0.1",
+    "moment": "^2.30.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",

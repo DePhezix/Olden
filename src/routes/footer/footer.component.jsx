@@ -1,10 +1,9 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./footer.styles.scss";
 
 function Footer() {
   const [contentEnough, setContentEnough] = useState(false);
-  const footerRef = useRef();
   const location = useLocation();
 
   const currentYear = new Date().getFullYear();
@@ -21,14 +20,20 @@ function Footer() {
       html.offsetHeight
     );
 
-
     setContentEnough(contentHeight > windowHeight);
-  }, [location.pathname]);
+  }, [
+    location.pathname,
+    window.innerHeight,
+    document.body.scrollHeight,
+    document.body.offsetHeight,
+    document.documentElement.clientHeight,
+    document.documentElement.scrollHeight,
+    document.documentElement.offsetHeight,
+  ]);
 
   return (
     <div
       className={`footer-container ${!contentEnough && "lower-footer"}`}
-      ref={footerRef}
     >
       <span>&#169; The Olden {currentYear}. No Rights Reserved</span>
     </div>

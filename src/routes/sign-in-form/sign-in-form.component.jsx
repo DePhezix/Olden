@@ -6,10 +6,9 @@ import Button from '../../components/button/button.component';
 import {Link} from 'react-router-dom';
 
 import {
-  createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
-} from '../../utils/firebase/firebase.utils';
+} from '../../utils/firebase/firebase-auth.utils';
 
 import './sign-in-form.styles.scss';
 

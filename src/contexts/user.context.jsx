@@ -1,10 +1,11 @@
 import { createContext, useEffect, useReducer } from "react";
+
+import { onAuthStateChange } from "../utils/firebase/firebase-auth.utils";
 import {
-  onAuthStateChangedListener,
-  createUserDocumentFromAuth,
   getUsersInfo,
-  getCurrentUserInfo,
-} from "../utils/firebase/firebase.utils";
+  getUserDocument,
+} from "../utils/firebase/firestore.utils";
+
 import { Navigate } from "react-router-dom";
 
 import { createAction } from "../utils/reducer/reducer.utils";
@@ -15,23 +16,32 @@ export const UserRedirect = (
   Pathname,
   currentUser,
   urlHistory,
-  pageType
+  homePageUrl,
+  signInPageUrl,
+  unrestricted
 ) => {
   if (VariationType === 1) {
     return currentUser && urlHistory[urlHistory.length - 1] != Pathname ? (
       <Navigate to={`${urlHistory[urlHistory.length - 1]}`} />
     ) : currentUser && urlHistory[urlHistory.length - 1] === Pathname ? (
-      <Navigate to="/home" replace />
-    ) : pageType === "PageNotFound" && currentUser ? (
-      <Navigate to={`${urlHistory[urlHistory.length - 2]}`} />
+      <Navigate to={`${homePageUrl}`} replace />
     ) : (
       Page
     );
   } else if (VariationType === 2) {
-    return currentUser ? Page : <Navigate to="/" />;
+    return currentUser ? Page : <Navigate to={`${signInPageUrl}`} />;
+  } else if (VariationType === 3) {
+    return currentUser && unrestricted ? (
+      Page
+    ) : currentUser && urlHistory[urlHistory.length - 1] === Pathname ? (
+      <Navigate to={`${homePageUrl}`} replace />
+    ) : currentUser ? (
+      <Navigate to={`${urlHistory[urlHistory.length - 1]}`} />
+    ) : (
+      <Navigate to={`${signInPageUrl}`} />
+    );
   }
 };
-
 
 export const UserContext = createContext({
   currentUser: {
@@ -57,7 +67,7 @@ const userReducer = (state, action) => {
     case USER_ACTION_TYPES.SET_CURRENT_USER:
       return {
         ...state,
-        currentUser: payload
+        currentUser: payload,
       };
     case USER_ACTION_TYPES.SET_ALL_USERS_DATA:
       return {
@@ -88,31 +98,31 @@ export const UserProvider = ({ children }) => {
   );
 
   useEffect(() => {
-      const isUserAdmin = currentUser.isAdmin;
-      if (isUserAdmin) {
-        const getAllUsersData = async () => {
-          const usersData = await getUsersInfo();
+    const isUserAdmin = currentUser.isAdmin;
+    if (isUserAdmin) {
+      const getAllUsersData = async () => {
+        const usersData = await getUsersInfo();
 
-          dispatch(createAction(USER_ACTION_TYPES.SET_ALL_USERS_DATA, usersData));
-        };
+        dispatch(createAction(USER_ACTION_TYPES.SET_ALL_USERS_DATA, usersData));
+      };
 
-        getAllUsersData();
-      }
+      getAllUsersData();
+    }
+
+    console.log(currentUser);
   }, [currentUser]);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      if (user) {
-        createUserDocumentFromAuth(user);
-      }
+    const unsubscribe = onAuthStateChange((user) => {
       const getCurrentUserData = async () => {
-        const userData = await getCurrentUserInfo(user ? user.uid : null);
+        const userData = await getUserDocument(user ? user : null);
 
         dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, userData));
       };
 
       getCurrentUserData();
     });
+
     return unsubscribe;
   }, []);
 

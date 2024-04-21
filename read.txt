@@ -1,0 +1,8 @@
+V1.1
+removed createUserDocumentFromAuth and added its functionality to getCurrentUserInfo (renamed to getUserDocument) to resolve sign up bug
+added adminUserCard.
+Editing users functionality added.
+firebase files broken to smaller files.
+Added User Search by email. 
+Added Product Search.
+Hid overflow-x for body.
