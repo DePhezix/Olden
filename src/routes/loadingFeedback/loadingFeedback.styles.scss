@@ -1,0 +1,142 @@
+.loading-feedback-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.3);
+  flex-direction: column;
+
+  .circle {
+    width: 75px !important;
+    height: 75px !important;
+    animation: drawCircle 4s linear infinite;
+    fill: #401f71;
+
+    @keyframes drawCircle {
+      0% {
+        stroke-dasharray: 0;
+        stroke-dashoffset: 251.2;
+      }
+      50% {
+        stroke-dasharray: 251.2;
+        stroke-dashoffset: 0;
+      }
+      100% {
+        stroke-dasharray: 251.2;
+        stroke-dashoffset: 0;
+      }
+    }
+  }
+
+  .feedback-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 0;
+    height: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    border-radius: 10px;
+    transition: 0.5s ease-in-out;
+    opacity: 0;
+
+    &.visible {
+      width: max-content;
+      height: max-content;
+      opacity: 1;
+      padding: 20px 40px;
+    }
+
+    .tick {
+      width: 100px !important; /* Adjust size as needed */
+      height: 100px !important; /* Adjust size as needed */
+      stroke-dasharray: 50;
+      stroke-dashoffset: 50;
+      animation: drawTick 2s linear forwards;
+
+      path {
+        color: #00a86b !important;
+      }
+
+      @keyframes drawTick {
+        0% {
+          stroke-dashoffset: 50;
+        }
+        100% {
+          stroke-dashoffset: 0;
+          stroke-dasharray: 0;
+        }
+      }
+    }
+
+    .x-symbol {
+      width: 100px !important; /* Adjust size as needed */
+      height: 100px !important; /* Adjust size as needed */
+      stroke-dasharray: 60;
+      stroke-dashoffset: 60;
+      animation: drawX 2s linear forwards;
+
+      path {
+        color: #e63946 !important;
+      }
+
+      @keyframes drawX {
+        0% {
+          stroke-dashoffset: 60;
+        }
+        100% {
+          stroke-dashoffset: 0;
+          stroke-dasharray: 0;
+        }
+      }
+    }
+
+    .feedback-text {
+      font-size: 24px;
+      font-weight: bold;
+      color: #00a86b !important;
+      z-index: 1;
+      margin-top: 7px;
+      border-radius: 10px;
+    }
+
+    .more-info {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      bottom: 0;
+      cursor: pointer;
+
+      span {
+        margin-left: 3px;
+        transform: translateY(-5px);
+        transition: 0.5s ease-in-out;;
+
+        &.opened {
+          transform: translate(-3px, 1px) rotate(-90deg);
+        }
+      }
+    }
+
+    .feedback-info {
+      font-size: 15px;
+      color: #6c757d;
+      margin-top: -10px;
+      transform: translateY(-5px);
+    }
+
+    .red-text {
+      color: #e63946 !important;
+    }
+  }
+}

@@ -1,0 +1,73 @@
+"filename", "language", "JavaScript", "SCSS", "JavaScript React", "XML", "comment", "blank", "total"
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\App.jsx", "JavaScript React", 0, 0, 40, 0, 23, 9, 72
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\assets\Olden.svg", "XML", 0, 0, 0, 17, 1, 0, 18
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\assets\X.svg", "XML", 0, 0, 0, 12, 0, 0, 12
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\assets\crown.svg", "XML", 0, 0, 0, 16, 1, 0, 17
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\assets\loading.svg", "XML", 0, 0, 0, 14, 0, 0, 14
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\assets\search.svg", "XML", 0, 0, 0, 1, 0, 0, 1
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\assets\shopping-bag.svg", "XML", 0, 0, 0, 52, 1, 1, 54
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\assets\tick.svg", "XML", 0, 0, 0, 8, 0, 0, 8
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\assets\trolley.svg", "XML", 0, 0, 0, 1, 0, 0, 1
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\Layout\layout.component.jsx", "JavaScript React", 0, 0, 15, 0, 0, 4, 19
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\Layout\layout.styles.scss", "SCSS", 0, 3, 0, 0, 0, 0, 3
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\admin-card-user\admin-card-user.component.jsx", "JavaScript React", 0, 0, 204, 0, 0, 13, 217
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\admin-card-user\admin-card-user.styles.scss", "SCSS", 0, 248, 0, 0, 0, 30, 278
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\button\button.component.jsx", "JavaScript React", 0, 0, 17, 0, 0, 4, 21
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\button\button.styles.scss", "SCSS", 0, 48, 0, 0, 0, 7, 55
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\cart-dropdown\cart-dropdown.component.jsx", "JavaScript React", 0, 0, 40, 0, 0, 7, 47
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\cart-dropdown\cart-dropdown.styles.scss", "SCSS", 0, 38, 0, 0, 0, 7, 45
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\cart-icon\cart-icon.component.jsx", "JavaScript React", 0, 0, 17, 0, 0, 5, 22
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\cart-icon\cart-icon.styles.scss", "SCSS", 0, 19, 0, 0, 0, 3, 22
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\cart-item\cart-item.component.jsx", "JavaScript React", 0, 0, 14, 0, 0, 2, 16
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\cart-item\cart-item.styles.scss", "SCSS", 0, 20, 0, 0, 0, 4, 24
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\category-preview\category-preview.component.jsx", "JavaScript React", 0, 0, 20, 0, 0, 4, 24
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\category-preview\category-preview.styless.scss", "SCSS", 0, 15, 0, 0, 0, 3, 18
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\checkout-item\checkout-item.component.jsx", "JavaScript React", 0, 0, 33, 0, 0, 6, 39
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\checkout-item\checkout-item.styles.scss", "SCSS", 0, 35, 0, 0, 0, 7, 42
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\directory-item\directory-item.component.jsx", "JavaScript React", 0, 0, 22, 0, 0, 5, 27
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\directory-item\directory-item.styles.scss", "SCSS", 0, 58, 0, 0, 0, 11, 69
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\directory\directory.component.jsx", "JavaScript React", 0, 0, 20, 0, 0, 6, 26
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\directory\directory.styles.scss", "SCSS", 0, 7, 0, 0, 0, 1, 8
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\form-input\form-input.component.jsx", "JavaScript React", 0, 0, 18, 0, 0, 3, 21
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\form-input\form-input.styles.scss", "SCSS", 0, 46, 0, 0, 0, 9, 55
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\product-categories-section-admin\product-categories-section-admin.components.jsx", "JavaScript React", 0, 0, 33, 0, 0, 6, 39
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\product-categories-section-admin\product-categories-section-admin.styles.scss", "SCSS", 0, 47, 0, 0, 0, 6, 53
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\product_card\product_card.component.jsx", "JavaScript React", 0, 0, 25, 0, 0, 6, 31
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\product_card\product_card.styles.scss", "SCSS", 0, 44, 0, 0, 0, 8, 52
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\user-section-admin\user-section-admin.component.jsx", "JavaScript React", 0, 0, 45, 0, 0, 7, 52
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\user-section-admin\user-section-admin.styles.scss", "SCSS", 0, 73, 0, 0, 0, 10, 83
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\contexts\cart.context.jsx", "JavaScript React", 0, 0, 105, 0, 0, 22, 127
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\contexts\categories.contexts.jsx", "JavaScript React", 0, 0, 21, 0, 0, 11, 32
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\contexts\loadingFeedback.context.jsx", "JavaScript React", 0, 0, 45, 0, 0, 9, 54
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\contexts\urlHistory.context.jsx", "JavaScript React", 0, 0, 29, 0, 0, 7, 36
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\contexts\user.context.jsx", "JavaScript React", 0, 0, 121, 0, 0, 21, 142
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\favicon.svg", "XML", 0, 0, 0, 15, 0, 1, 16
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\index.scss", "SCSS", 0, 26, 0, 0, 0, 7, 33
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\main.jsx", "JavaScript React", 0, 0, 27, 0, 0, 3, 30
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\admin\admin.component.jsx", "JavaScript React", 0, 0, 13, 0, 0, 6, 19
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\admin\admin.styles.scss", "SCSS", 0, 2, 0, 0, 0, 3, 5
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\categories-preview\categories-preview.component.jsx", "JavaScript React", 0, 0, 17, 0, 0, 3, 20
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\category\category.component.jsx", "JavaScript React", 0, 0, 36, 0, 0, 10, 46
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\category\category.styles.scss", "SCSS", 0, 19, 0, 0, 0, 3, 22
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\checkout\checkout.component.jsx", "JavaScript React", 0, 0, 46, 0, 0, 7, 53
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\checkout\checkout.styles.scss", "SCSS", 0, 48, 0, 0, 0, 9, 57
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\footer\footer.component.jsx", "JavaScript React", 0, 0, 35, 0, 0, 9, 44
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\footer\footer.styles.scss", "SCSS", 0, 10, 0, 0, 0, 1, 11
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\home\home.component.jsx", "JavaScript React", 0, 0, 16, 0, 0, 7, 23
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\loadingFeedback\loadingFeedback.component.jsx", "JavaScript React", 0, 0, 35, 0, 7, 9, 51
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\loadingFeedback\loadingFeedback.styles.scss", "SCSS", 0, 104, 0, 0, 0, 13, 117
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\navigation\navigation.component.jsx", "JavaScript React", 0, 0, 56, 0, 0, 12, 68
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\navigation\navigation.styles.scss", "SCSS", 0, 30, 0, 0, 0, 5, 35
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\page_not_found\page-not-found.components.jsx", "JavaScript React", 0, 0, 10, 0, 0, 2, 12
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\page_not_found\page-not-found.styles.scss", "SCSS", 0, 15, 0, 0, 0, 2, 17
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\shop\shop.component.jsx", "JavaScript React", 0, 0, 13, 0, 0, 4, 17
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\shop\shop.component.scss", "SCSS", 0, 6, 0, 0, 0, 0, 6
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\sign-in-form\sign-in-form.component.jsx", "JavaScript React", 0, 0, 80, 0, 0, 21, 101
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\sign-in-form\sign-in-form.styles.scss", "SCSS", 0, 40, 0, 0, 0, 8, 48
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\sign-up-form\sign-up-form.component.jsx", "JavaScript React", 0, 0, 86, 0, 0, 20, 106
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\sign-up-form\sign-up-form.styles.scss", "SCSS", 0, 46, 0, 0, 0, 9, 55
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\utils\firebase\firebase-auth.utils.js", "JavaScript", 54, 0, 0, 0, 3, 8, 65
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\utils\firebase\firebase-client.utils.js", "JavaScript", 11, 0, 0, 0, 1, 4, 16
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\utils\firebase\firestore.utils.js", "JavaScript", 115, 0, 0, 0, 1, 20, 136
+"c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\utils\reducer\reducer.utils.js", "JavaScript", 3, 0, 0, 0, 0, 0, 3
+"Total", "-", 183, 1047, 1354, 136, 38, 470, 3228

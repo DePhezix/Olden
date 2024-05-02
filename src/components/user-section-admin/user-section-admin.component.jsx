@@ -1,16 +1,33 @@
 import "./user-section-admin.styles.scss";
+import { ReactComponent as SearchIcon } from "../../assets/search.svg";
 
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
+
 import { UserContext } from "../../contexts/user.context";
 
 import AdminCardUser from "../../components/admin-card-user/admin-card-user.component";
-import { ReactComponent as SearchIcon } from "../../assets/search.svg";
 
 function UserSectionForAdmin() {
   const [isUserSearching, setIsUserSearching] = useState(false);
   const [userSearch, setUserSearch] = useState("");
+  const [sortedUsers, setSortedUsers] = useState([]);
 
   const { allUsersData } = useContext(UserContext);
+
+  useEffect(() => {
+    const usersArray = Object.keys(allUsersData).map((email) => ({
+      email,
+      createdAt: allUsersData[email].createdAt,
+    }));
+
+    const sortedArray = usersArray.sort(
+      (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+    );
+
+    setSortedUsers(sortedArray);
+  }, [allUsersData]);
+
+  
 
   return (
     <div className="user-section-admin">
@@ -30,18 +47,21 @@ function UserSectionForAdmin() {
             }`}
             value={userSearch}
             onChange={(e) => setUserSearch(e.target.value)}
+            disabled={!isUserSearching}
           />
         </span>
       </h1>
       <div className="user-cards">
         <AdminCardUser userCreatingCard cardVisible />
-        {Object.keys(allUsersData).map((userData) => (
-          <AdminCardUser
-            userData={userData}
-            cardVisible={userData.includes(userSearch)}
-            key={userData}
-          />
-        ))}
+        {sortedUsers
+          .filter((userData) => userData.email.includes(userSearch))
+          .map((userData) => (
+            <AdminCardUser
+              userData={userData.email}
+              cardVisible
+              key={userData.email}
+            />
+          ))}
       </div>
     </div>
   );

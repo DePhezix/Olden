@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 
 import { UserContext } from "../../contexts/user.context";
 import { CartContext } from "../../contexts/cart.context";
+import { LoadingFeedbackContext } from "../../contexts/loadingFeedback.context";
 
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
@@ -12,13 +13,19 @@ import { signOutUser } from "../../utils/firebase/firebase-auth.utils";
 import "./navigation.styles.scss";
 
 const Navigation = () => {
+  const { setIsLoading, setIsSuccessful } = useContext(LoadingFeedbackContext);
   const { currentUser } = useContext(UserContext);
   const { isCartOpen } = useContext(CartContext);
 
   const location = useLocation();
 
   const signOutHandler = async () => {
-    await signOutUser();
+    setIsLoading(true)
+
+    try {
+      await signOutUser();
+    } catch {(error) => setIsSuccessful(error.code)}
+    setIsLoading(false)
   };
 
   return (

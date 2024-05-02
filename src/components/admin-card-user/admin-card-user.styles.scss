@@ -10,7 +10,7 @@
   border-radius: 10px;
   padding: 20px;
   flex: 0 0 auto;
-  justify-content: space-around;
+  justify-content: space-evenly;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
@@ -60,6 +60,7 @@
     -moz-transition: 0.3s ease-in-out;
     -ms-transition: 0.3s ease-in-out;
     -o-transition: 0.3s ease-in-out;
+
     * {
       margin-bottom: 7px;
     }
@@ -76,6 +77,7 @@
   .hidden {
     display: none;
   }
+
   .display-name,
   .display-name:disabled {
     display: block;
@@ -155,6 +157,15 @@
     -moz-transform: translateY(-15px);
     -ms-transform: translateY(-15px);
     -o-transform: translateY(-15px);
+
+    .lower-table-body {
+      transform: translateY(10px);
+      -webkit-transform: translateY(10px);
+      -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+      -o-transform: translateY(10px);
+}
+
     tr {
       display: flex;
       justify-content: space-between;
@@ -189,7 +200,7 @@
           -moz-transform: translateY(-5.1px) !important;
           -ms-transform: translateY(-5.1px) !important;
           -o-transform: translateY(-5.1px) !important;
-}
+        }
       }
 
       td {
@@ -241,6 +252,14 @@
       justify-content: space-around;
       margin-top: 15px;
       overflow-x: scroll;
+
+      &.lower-text {
+          transform: translateY(13px);
+          -webkit-transform: translateY(13px);
+          -moz-transform: translateY(13px);
+          -ms-transform: translateY(13px);
+          -o-transform: translateY(13px);
+}
 
       td {
         cursor: pointer;

@@ -1,8 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
+
+import { LoadingFeedbackContext } from "../../contexts/loadingFeedback.context";
+
 import "./footer.styles.scss";
 
 function Footer() {
+  const { isLoading } = useContext(LoadingFeedbackContext)
+
   const [contentEnough, setContentEnough] = useState(false);
   const location = useLocation();
 
@@ -24,19 +29,15 @@ function Footer() {
   }, [
     location.pathname,
     window.innerHeight,
-    document.body.scrollHeight,
-    document.body.offsetHeight,
-    document.documentElement.clientHeight,
-    document.documentElement.scrollHeight,
-    document.documentElement.offsetHeight,
+    isLoading
   ]);
 
   return (
-    <div
-      className={`footer-container ${!contentEnough && "lower-footer"}`}
-    >
-      <span>&#169; The Olden {currentYear}. No Rights Reserved</span>
-    </div>
+    !isLoading &&  (
+      <div className={`footer-container ${!contentEnough && "lower-footer"}`}>
+        <span>&#169; The Olden {currentYear}. No Rights Reserved</span>
+      </div>
+    )
   );
 }
 

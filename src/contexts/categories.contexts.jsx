@@ -1,4 +1,6 @@
-import { createContext, useState, useEffect }  from 'react'
+import { createContext, useState, useEffect, useContext }  from 'react'
+
+import { LoadingFeedbackContext } from './loadingFeedback.context';
 
 import { getCategoriesAndDocuments } from "../utils/firebase/firestore.utils.js";
 
@@ -7,12 +9,18 @@ export const CategoriesContext = createContext({
 })
 
 export function CategoriesProvider({children}) {
+    const { setIsLoading } = useContext(LoadingFeedbackContext);
+
     const [categoriesMap, setCategoriesMap] = useState({});
 
     useEffect(() => {
         const getCategoriesMap = async () => {
+            setIsLoading(true)
+
             const categoryMap = await getCategoriesAndDocuments();
             setCategoriesMap(categoryMap)
+
+            setIsLoading(false)
         }
 
         getCategoriesMap();

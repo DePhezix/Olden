@@ -1,31 +1,30 @@
 import React, { useContext, useState } from "react";
+
 import { UserContext } from "../../contexts/user.context";
+import { LoadingFeedbackContext } from "../../contexts/loadingFeedback.context";
 
 import Button from "../button/button.component";
-
-import {
-  updateUserDataInDatabase,
-  getUserDocument,
-} from "../../utils/firebase/firestore.utils";
-
-import { createUserAsAdmin } from '../../utils/firebase/firebase-auth.utils'
 
 import "./admin-card-user.styles.scss";
 
 function AdminCardUser({ userData, cardVisible, userCreatingCard }) {
-  const { allUsersData } = useContext(UserContext);
-  const { displayName, createdAt, isAdmin, uid } = userCreatingCard
-    ? {}
-    : allUsersData[userData];
+  const { setIsLoading, setIsSuccessful } = useContext(LoadingFeedbackContext);
+  const { allUsersData, updateUserDatabase } = useContext(UserContext);
+  const {
+    displayName: originalDisplayName,
+    createdAt: originalCreatedAt,
+    isAdmin,
+    uid,
+  } = userCreatingCard ? {} : allUsersData[userData];
   const email = userCreatingCard ? "" : userData;
 
   const currentDate = new Date();
   const [creatingUser, setCreatingUser] = useState(false);
   const [newDisplayName, setNewDisplayName] = useState(
-    userCreatingCard ? "Display Name" : displayName
+    userCreatingCard ? "Display Name" : originalDisplayName
   );
   const [newDate, setNewDate] = useState(
-    userCreatingCard ? currentDate : createdAt
+    userCreatingCard ? currentDate : originalCreatedAt
   );
   const [selectedAuthority, setSelectedAuthority] = useState(
     userCreatingCard
@@ -40,20 +39,32 @@ function AdminCardUser({ userData, cardVisible, userCreatingCard }) {
   const [password, setPassword] = useState("Password");
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleApplyChange = () => {
-    const newDateObj = new Date(newDate);
-    const updatedDataObj = {
-      createdAt: newDateObj,
-      displayName: newDisplayName,
-      isAdmin: selectedAuthority.current === "Admin" ? true : false,
-    };
-    updateUserDataInDatabase(allUsersData[userData], updatedDataObj);
-    setIsEditing(false);
+  const handleApplyChange = async () => {
+    try {
+      setIsLoading(true)
+
+      const newDateObj = new Date(newDate);
+      const updatedDataObj = {
+        createdAt: newDateObj,
+        displayName: newDisplayName,
+        isAdmin: selectedAuthority.current === "Admin",
+      };
+
+      updateUserDatabase(allUsersData[userData], updatedDataObj);
+
+      setIsEditing(false);
+      setIsLoading(false);
+      setIsSuccessful("");
+    } catch (error) {
+      setIsEditing(false);
+      setIsLoading(false);
+      setIsSuccessful(error.message);
+    }
   };
 
   const resetEditingFields = () => {
-    setNewDisplayName(displayName);
-    setNewDate(createdAt);
+    setNewDisplayName(originalDisplayName);
+    setNewDate(originalCreatedAt);
     setSelectedAuthority(
       isAdmin
         ? { current: "Admin", secondary: "None" }
@@ -65,34 +76,15 @@ function AdminCardUser({ userData, cardVisible, userCreatingCard }) {
   const resetNewUserFields = () => {
     setNewDisplayName("Display Name");
     setNewDate(currentDate);
-    setPassword("Password")
+    setPassword("Password");
     setSelectedAuthority({ current: "None", secondary: "Admin" });
     setCreatingUser(false);
   };
 
-  const handleUserCreate = async () => {
-    try {
-      const isNewUserAdmin = selectedAuthority.current === "Admin";
-    const givenDate = new Date(newDate);
-
-      // const { user } = createUserAsAdmin({email: newEmail, password: password})
-
-      // await getUserDocument(user, {
-      //   newDisplayName,
-      //   isNewUserAdmin,
-      //   givenDate,
-      // });
-
-      resetNewUserFields();
-    } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
-        alert("Cannot create user, email already in use");
-      } else {
-        console.log("User creation encountered an error", error);
-      }
-    }
+  const handleUserCreate = () => {
+    setIsSuccessful("Function surpasses creator's ability")
+    resetNewUserFields()
   };
-
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -126,7 +118,9 @@ function AdminCardUser({ userData, cardVisible, userCreatingCard }) {
           creatingUser ? "creating-user" : null
         }`}
       >
-        <Button onClick={() => setCreatingUser(true)}>Create New User</Button>
+        <Button onClick={() => setCreatingUser(true)} buttonType={"short"}>
+          Create New User
+        </Button>
       </div>
       <input
         value={newDisplayName}
@@ -135,7 +129,7 @@ function AdminCardUser({ userData, cardVisible, userCreatingCard }) {
         className="display-name"
       />
       <table className="extraDetails">
-        <tbody>
+        <tbody className={!userCreatingCard ? "lower-table-body" : null}>
           <tr>
             <td>Joined in :</td>
             <td>
@@ -155,8 +149,13 @@ function AdminCardUser({ userData, cardVisible, userCreatingCard }) {
           <tr>
             <td>Email:</td>
             <td className="email-prompt">
-              <input className="email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} disabled={!creatingUser} />
-              </td>
+              <input
+                className="email"
+                value={newEmail}
+                onChange={(e) => setNewEmail(e.target.value)}
+                disabled={!creatingUser}
+              />
+            </td>
           </tr>
           {userCreatingCard ? (
             <tr className="password-prompt">
@@ -192,11 +191,15 @@ function AdminCardUser({ userData, cardVisible, userCreatingCard }) {
               </select>
             </td>
           </tr>
-          <tr className="user-change">
+          <tr
+            className={`user-change ${!userCreatingCard ? "lower-text" : null}`}
+          >
             {userCreatingCard ? (
               <>
-                <td className="blue-text" onClick={handleUserCreate} >Create User</td>
-                <td className="red-text" onClick={resetNewUserFields} >
+                <td className="blue-text" onClick={handleUserCreate}>
+                  Create User
+                </td>
+                <td className="red-text" onClick={resetNewUserFields}>
                   Cancel Creation
                 </td>
               </>
@@ -212,7 +215,10 @@ function AdminCardUser({ userData, cardVisible, userCreatingCard }) {
                 <td className="blue-text" onClick={handleApplyChange}>
                   Apply Changes
                 </td>
-                <td className="red-text" onClick={resetEditingFields}>
+                <td
+                  className="red-text lower-text"
+                  onClick={resetEditingFields}
+                >
                   Cancel Edit
                 </td>
               </>

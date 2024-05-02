@@ -32,6 +32,14 @@
     }
   }
 
+  &.short {
+    height: 40px;
+    min-width: 230px;
+    width: auto;
+    display: flex;
+    align-items: center;
+  }
+
   &.inverted {
     background-color: white;
     color: black !important;

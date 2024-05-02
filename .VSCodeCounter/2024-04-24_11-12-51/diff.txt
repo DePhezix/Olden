@@ -1,0 +1,67 @@
+Date : 2024-04-24 11:12:51
+Directory : c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src
+Total : 26 files,  234 codes, 1 comments, 42 blanks, all 277 lines
+
+Languages
++------------------+------------+------------+------------+------------+------------+
+| language         | files      | code       | comment    | blank      | total      |
++------------------+------------+------------+------------+------------+------------+
+| SCSS             |          7 |        156 |          0 |         26 |        182 |
+| JavaScript React |         14 |         87 |          1 |         24 |        112 |
+| XML              |          3 |         34 |          0 |          0 |         34 |
+| CSS              |          2 |        -43 |          0 |         -8 |        -51 |
++------------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                        | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                           |         26 |        234 |          1 |         42 |        277 |
+| . (Files)                                                                                                                   |          4 |        -14 |          0 |         -1 |        -15 |
+| assets                                                                                                                      |          3 |         34 |          0 |          0 |         34 |
+| components                                                                                                                  |          8 |         29 |         -6 |          3 |         26 |
+| components\Layout                                                                                                           |          2 |          5 |          0 |          2 |          7 |
+| components\admin-card-user                                                                                                  |          2 |         14 |         -6 |          0 |          8 |
+| components\button                                                                                                           |          2 |          8 |          0 |          1 |          9 |
+| components\user-section-admin                                                                                               |          2 |          2 |          0 |          0 |          2 |
+| contexts                                                                                                                    |          4 |         33 |          0 |          5 |         38 |
+| routes                                                                                                                      |          7 |        152 |          7 |         35 |        194 |
+| routes\footer                                                                                                               |          2 |         -1 |          0 |          3 |          2 |
+| routes\loadingFeedback                                                                                                      |          2 |        139 |          7 |         22 |        168 |
+| routes\navigation                                                                                                           |          1 |          4 |          0 |          2 |          6 |
+| routes\sign-in-form                                                                                                         |          1 |          6 |          0 |          5 |         11 |
+| routes\sign-up-form                                                                                                         |          1 |          4 |          0 |          3 |          7 |
++-----------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| filename                                                                                                                    | language         | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\App.css                                                        | CSS              |        -17 |          0 |         -3 |        -20 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\assets\X.svg                                                   | XML              |         12 |          0 |          0 |         12 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\assets\loading.svg                                             | XML              |         14 |          0 |          0 |         14 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\assets\tick.svg                                                | XML              |          8 |          0 |          0 |          8 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\Layout\layout.component.jsx                         | JavaScript React |          2 |          0 |          2 |          4 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\Layout\layout.styles.scss                           | SCSS             |          3 |          0 |          0 |          3 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\admin-card-user\admin-card-user.component.jsx       | JavaScript React |          0 |         -6 |         -5 |        -11 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\admin-card-user\admin-card-user.styles.scss         | SCSS             |         14 |          0 |          5 |         19 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\button\button.component.jsx                         | JavaScript React |          1 |          0 |          0 |          1 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\button\button.styles.scss                           | SCSS             |          7 |          0 |          1 |          8 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\user-section-admin\user-section-admin.component.jsx | JavaScript React |          1 |          0 |          0 |          1 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\components\user-section-admin\user-section-admin.styles.scss   | SCSS             |          1 |          0 |          0 |          1 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\contexts\categories.contexts.jsx                               | JavaScript React |          4 |          0 |          4 |          8 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\contexts\loading.content.jsx                                   | JavaScript React |        -21 |          0 |         -8 |        -29 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\contexts\loadingFeedback.context.jsx                           | JavaScript React |         45 |          0 |          9 |         54 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\contexts\user.context.jsx                                      | JavaScript React |          5 |          0 |          0 |          5 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\index.css                                                      | CSS              |        -26 |          0 |         -5 |        -31 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\index.scss                                                     | SCSS             |         26 |          0 |          7 |         33 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\main.jsx                                                       | JavaScript React |          3 |          0 |          0 |          3 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\footer\footer.component.jsx                             | JavaScript React |         -2 |          0 |          3 |          1 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\footer\footer.styles.scss                               | SCSS             |          1 |          0 |          0 |          1 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\loadingFeedback\loadingFeedback.component.jsx           | JavaScript React |         35 |          7 |          9 |         51 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\loadingFeedback\loadingFeedback.styles.scss             | SCSS             |        104 |          0 |         13 |        117 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\navigation\navigation.component.jsx                     | JavaScript React |          4 |          0 |          2 |          6 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\sign-in-form\sign-in-form.component.jsx                 | JavaScript React |          6 |          0 |          5 |         11 |
+| c:\Users\Mirzokhid\OneDrive\Desktop\git\React\Vite-Crown\src\routes\sign-up-form\sign-up-form.component.jsx                 | JavaScript React |          4 |          0 |          3 |          7 |
+| Total                                                                                                                       |                  |        234 |          1 |         42 |        277 |
++-----------------------------------------------------------------------------------------------------------------------------+------------------+------------+------------+------------+------------+

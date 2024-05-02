@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  font-family: "Open Sans Condensed", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 10px 20px;
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+
+  &.no-scroll {
+    overflow: hidden;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  user-select: none;
+  color: #401f71 !important;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+

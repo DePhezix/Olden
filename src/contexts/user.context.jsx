@@ -1,14 +1,16 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useContext } from "react";
+import { Navigate } from "react-router-dom";
 
 import { onAuthStateChange } from "../utils/firebase/firebase-auth.utils";
 import {
   getUsersInfo,
   getUserDocument,
+  updateUserDataInDatabase,
 } from "../utils/firebase/firestore.utils";
-
-import { Navigate } from "react-router-dom";
-
 import { createAction } from "../utils/reducer/reducer.utils";
+
+import { DataUpdatedContext } from "./dataUpdated.context";
+import { LoadingFeedbackContext } from "./loadingFeedback.context";
 
 export const UserRedirect = (
   VariationType,
@@ -51,8 +53,18 @@ export const UserContext = createContext({
     uid: null,
     isAdmin: false,
   },
-  redirect: UserRedirect,
+  redirect: (...args) => {
+    const setLoading = useContext(LoadingFeedbackContext);
+    return UserRedirect(...args, setLoading);
+  },
   allUsersData: {},
+  updateUserDatabase: async (user, newDataObj) => {
+    const { setUserDataInAdminVersion, userDataInAdminVersion } =
+      useContext(DataUpdatedContext);
+
+    await updateUserDataInDatabase(user, newDataObj);
+    setUserDataInAdminVersion(userDataInAdminVersion + 1);
+  },
 });
 
 export const USER_ACTION_TYPES = {
@@ -91,7 +103,23 @@ const INITIAL_STATE = {
 };
 
 export const UserProvider = ({ children }) => {
-  const redirect = UserRedirect;
+  const { setUserDataInAdminVersion, userDataInAdminVersion } =
+    useContext(DataUpdatedContext);
+  const { setIsLoading, isSuccessful } = useContext(LoadingFeedbackContext);
+  const setLoading = useContext(LoadingFeedbackContext);
+
+  const redirect = (...args) => {
+    return UserRedirect(...args, setLoading);
+  };
+  const updateUserDatabase = async (user, newDataObj) => {
+    await updateUserDataInDatabase(user, newDataObj);
+    setUserDataInAdminVersion(userDataInAdminVersion + 1);
+  }
+
+  const setAllUsersData = (usersData) => {
+    dispatch(createAction(USER_ACTION_TYPES.SET_ALL_USERS_DATA, usersData))
+  }
+
   const [{ currentUser, allUsersData }, dispatch] = useReducer(
     userReducer,
     INITIAL_STATE
@@ -101,23 +129,25 @@ export const UserProvider = ({ children }) => {
     const isUserAdmin = currentUser.isAdmin;
     if (isUserAdmin) {
       const getAllUsersData = async () => {
+        {typeof isSuccessful !== "string" && setIsLoading(true);}
         const usersData = await getUsersInfo();
 
-        dispatch(createAction(USER_ACTION_TYPES.SET_ALL_USERS_DATA, usersData));
+        setAllUsersData(usersData);
+        setIsLoading(false);
       };
 
       getAllUsersData();
     }
-
-    console.log(currentUser);
-  }, [currentUser]);
+  }, [currentUser, userDataInAdminVersion]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChange((user) => {
       const getCurrentUserData = async () => {
-        const userData = await getUserDocument(user ? user : null);
+        setIsLoading(true);
+        const userData = await getUserDocument(user ? user : null, {});
 
         dispatch(createAction(USER_ACTION_TYPES.SET_CURRENT_USER, userData));
+        setIsLoading(false);
       };
 
       getCurrentUserData();
@@ -130,6 +160,8 @@ export const UserProvider = ({ children }) => {
     currentUser,
     allUsersData,
     redirect,
+    updateUserDatabase,
+    setAllUsersData
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

@@ -1,14 +1,15 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { Link } from "react-router-dom";
 
 import FormInput from '../../components/form-input/form-input.component';
 import Button from '../../components/button/button.component';
-
-import {Link} from 'react-router-dom';
 
 import {
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from '../../utils/firebase/firebase-auth.utils';
+
+import { LoadingFeedbackContext } from '../../contexts/loadingFeedback.context';
 
 import './sign-in-form.styles.scss';
 
@@ -18,6 +19,8 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
+  const { setIsLoading, setIsSuccessful } = useContext(LoadingFeedbackContext);
+
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
@@ -26,17 +29,25 @@ const SignInForm = () => {
   };
 
   const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
+    setIsLoading(true)
+
+    try {
+      await signInWithGooglePopup();
+    } catch {(error) => {
+       setIsSuccessful(error.code)
+    }}
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
+      setIsLoading(true)
+
       await signInAuthUserWithEmailAndPassword(email, password);
       resetFormFields();
     } catch (error) {
-      console.log('user sign in failed', error);
+      setIsSuccessful(error.code)
     }
   };
 

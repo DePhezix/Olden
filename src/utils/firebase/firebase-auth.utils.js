@@ -7,13 +7,14 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  GoogleAuthProvider,
 } from "firebase/auth";
 
 import app from "./firebase-client.utils";
 
 export const auth = getAuth(app);
 
-// Client Functions
+const googleProvider = new GoogleAuthProvider()
 
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
@@ -26,7 +27,7 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
       email,
       password
     );
-    return userCredential.user;
+    return userCredential;
   } catch (error) {
     console.error("Error creating user:", error);
     throw error;
@@ -39,7 +40,7 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
       email,
       password
     );
-    return userCredential.user;
+    return userCredential;
   } catch (error) {
     console.error("Error signing in:", error);
     throw error;
@@ -56,10 +57,3 @@ export const signOutUser = async () => {
 };
 export const onAuthStateChange = (callback) =>
   onAuthStateChanged(auth, callback);
-
-
-// Admin Functions
-
-export const createUserAsAdmin = ({email, password}) => {
-
-}

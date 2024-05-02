@@ -11,7 +11,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-import app from "./firebase-client.utils";
+import app from "./firebase-client.utils.js";
 
 export const db = getFirestore(app);
 export const addCollectionAndDocuments = async (
@@ -56,6 +56,7 @@ export const getCategoriesAndDocuments = async () => {
 
   return categoryMap;
 };
+
 export const getUserDocument = async (
   providedUser,
   additionalInformation = {}
@@ -65,24 +66,17 @@ export const getUserDocument = async (
     const userSnapshot = await getDoc(userDocRef);
 
     if (!userSnapshot.exists()) {
-      const {
-        newDisplayName,
-        isNewUserAdmin,
-        givenDate,
-        ...restAdditionalInfo
-      } = additionalInformation;
-
-      const { email, uid } = providedUser;
-      const createdAt = givenDate || new Date();
+      const { email, displayName, uid } = providedUser;
+      const createdAt = new Date();
 
       try {
         await setDoc(userDocRef, {
+          displayName,
           email,
           createdAt,
           uid,
-          isAdmin: isNewUserAdmin || false,
-          displayName: newDisplayName || null,
-          ...restAdditionalInfo,
+          isAdmin: false,
+          ...additionalInformation,
         });
       } catch (error) {
         console.error("Error creating the user:", error);
@@ -104,6 +98,7 @@ export const getUserDocument = async (
     return noUserObj;
   }
 };
+
 export const updateUserDataInDatabase = async (user, newDataObject) => {
   const userDocRef = doc(db, "users", user.uid);
 
