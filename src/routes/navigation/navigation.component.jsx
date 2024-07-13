@@ -1,16 +1,16 @@
-import { Fragment, useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Fragment, useContext } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-import { UserContext } from "../../contexts/user.context";
-import { CartContext } from "../../contexts/cart.context";
-import { LoadingFeedbackContext } from "../../contexts/loadingFeedback.context";
+import { UserContext } from '../../contexts/user.context';
+import { CartContext } from '../../contexts/cart.context';
+import { LoadingFeedbackContext } from '../../contexts/loadingFeedback.context';
 
-import CartIcon from "../../components/cart-icon/cart-icon.component";
-import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
+import CartIcon from '../../components/cart-icon/cart-icon.component';
+import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component';
 
-import { signOutUser } from "../../utils/firebase/firebase-auth.utils";
+import { signOutUser } from '../../utils/firebase/firebase-auth.utils';
 
-import "./navigation.styles.scss";
+import './navigation.styles.scss';
 
 const Navigation = () => {
   const { setIsLoading, setIsSuccessful } = useContext(LoadingFeedbackContext);
@@ -18,37 +18,44 @@ const Navigation = () => {
   const { isCartOpen } = useContext(CartContext);
 
   const location = useLocation();
+  const userHasAuthority =
+    currentUser.authority === 'super admin' ||
+    currentUser.authority === 'admin' ||
+    currentUser.authority === 'manager' ||
+    currentUser.authority === 'support';
 
   const signOutHandler = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
 
     try {
       await signOutUser();
-    } catch {(error) => setIsSuccessful(error.code)}
-    setIsLoading(false)
+    } catch {
+      (error) => setIsSuccessful(error.code);
+    }
+    setIsLoading(false);
   };
 
   return (
     <Fragment>
       <div className="navigation">
-        <Link className="logo-container" to={currentUser ? "/home" : "/"}>
+        <Link className="logo-container" to={currentUser ? '/home' : '/'}>
           <div className="logo">The Olden</div>
         </Link>
         <div className="nav-links-container">
           <Link className="nav-link" to="/shop">
             COLLECTIONS
           </Link>
-          {currentUser.isAdmin && (
-            <Link className="nav-link" to="/admin">
-              ADMIN
+          {userHasAuthority && (
+            <Link className="nav-link" to="/dashboard">
+              DASHBOARD
             </Link>
           )}
           {currentUser.uid ? (
             <span className="nav-link" onClick={signOutHandler}>
-              {" "}
-              SIGN OUT{" "}
+              {' '}
+              SIGN OUT{' '}
             </span>
-          ) : location.pathname !== "/" ? (
+          ) : location.pathname !== '/' ? (
             <Link className="nav-link" to="/">
               SIGN IN
             </Link>

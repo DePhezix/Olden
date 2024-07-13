@@ -49,8 +49,8 @@ export const getCategoriesAndDocuments = async () => {
   const querySnapshot = await getDocs(q);
 
   const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    const { title, id, imageUrl, route, items } = docSnapshot.data();
-    acc[title.toLowerCase()] = [id, imageUrl, route, items];
+    const { title, id, imageUrl, darkImageUrl, route, items, showInHome } = docSnapshot.data();
+    acc[title.toLowerCase()] = [id, imageUrl, route, items, darkImageUrl, showInHome];
     return acc;
   }, {});
 
@@ -75,7 +75,7 @@ export const getUserDocument = async (
           email,
           createdAt,
           uid,
-          isAdmin: false,
+          authority: "Customer",
           ...additionalInformation,
         });
       } catch (error) {
@@ -93,7 +93,7 @@ export const getUserDocument = async (
       email: null,
       displayName: null,
       uid: null,
-      isAdmin: false,
+      authority: "None"
     };
     return noUserObj;
   }
@@ -106,6 +106,15 @@ export const updateUserDataInDatabase = async (user, newDataObject) => {
     ...newDataObject,
   });
 };
+
+export const editCategories = async (categoryTitle, newDataObj) => {
+  const categoryDocRef = doc(db, "categories", categoryTitle)
+
+  await updateDoc(categoryDocRef, {
+    ...newDataObj
+  })
+}
+
 export const getUsersInfo = async () => {
   const collectionRef = collection(db, "users");
 
@@ -113,11 +122,11 @@ export const getUsersInfo = async () => {
   const querySnapshot = await getDocs(q);
 
   const userMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    const { isAdmin, createdAt, displayName, email, uid } = docSnapshot.data();
+    const { authority, createdAt, displayName, email, uid } = docSnapshot.data();
     const modifiedCreatedAt = createdAt.toDate().toISOString().split("T")[0];
 
     acc[email] = {
-      isAdmin: isAdmin,
+      authority: authority,
       createdAt: modifiedCreatedAt,
       displayName: displayName,
       uid: uid,

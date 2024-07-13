@@ -1,3 +1,8 @@
+V1.3
+Added Admin_Card_Categories with Styles
+Added arriving transition for Admin_Card_User
+Created Categories Management with ability to show or not show categories in Admin
+
 V1.2
 Modified Admin_Card_User Styles
 User Search now disables upon no usage
@@ -16,4 +21,4 @@ Editing users functionality added.
 firebase files broken to smaller files.
 Added User Search by email. 
 Added Product Search.
-Hid overflow-x for body.
+Hid overflow-x for body

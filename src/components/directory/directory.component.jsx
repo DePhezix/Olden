@@ -2,8 +2,6 @@ import DirectoryItem from "../directory-item/directory-item.component";
 import "./directory.styles.scss";
 
 const Directory = ({ categories }) => {
-
-
   const sortedKeys = Object.keys(categories).sort(
     (a, b) => categories[a][0] - categories[b][0]
   );
@@ -16,7 +14,7 @@ const Directory = ({ categories }) => {
           imageUrl: categories[title][1],
           route: categories[title][2],
         };
-        return <DirectoryItem key={title[0]} category={category} />;
+        return categories[title][5] && <DirectoryItem key={title[0]} category={category} />
       })}
     </div>
   );

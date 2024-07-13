@@ -8,6 +8,10 @@ body {
   position: relative;
   min-height: 100vh;
 
+  .dark {
+
+  }
+
   &.no-scroll {
     overflow: hidden;
   }

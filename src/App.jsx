@@ -1,20 +1,20 @@
-import Layout from "./components/Layout/layout.component";
+import Layout from './components/Layout/layout.component';
 
-import SignUpForm from "./routes/sign-up-form/sign-up-form.component";
-import SignInForm from "./routes/sign-in-form/sign-in-form.component";
-import Home from "./routes/home/home.component";
-import Shop from "./routes/shop/shop.component";
-import Checkout from "./routes/checkout/checkout.component";
-import PageNotFound from "./routes/page_not_found/page-not-found.components";
-import Admin from "./routes/admin/admin.component";
+import SignUpForm from './routes/sign-up-form/sign-up-form.component';
+import SignInForm from './routes/sign-in-form/sign-in-form.component';
+import Home from './routes/home/home.component';
+import Shop from './routes/shop/shop.component';
+import Checkout from './routes/checkout/checkout.component';
+import PageNotFound from './routes/page_not_found/page-not-found.components';
+import Admin from './routes/admin/admin.component';
 
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
 
-import { UserContext } from "./contexts/user.context";
-import { CartContext } from "./contexts/cart.context";
-import { UrlHistoryContext } from "./contexts/urlHistory.context";
-import { LoadingFeedbackContext } from "./contexts/loadingFeedback.context";
+import { UserContext } from './contexts/user.context';
+import { CartContext } from './contexts/cart.context';
+import { UrlHistoryContext } from './contexts/urlHistory.context';
+import { LoadingFeedbackContext } from './contexts/loadingFeedback.context';
 
 const App = () => {
   const { currentUser, redirect } = useContext(UserContext);
@@ -23,6 +23,11 @@ const App = () => {
   const { setIsLoading } = useContext(LoadingFeedbackContext);
 
   const location = useLocation();
+  const userHasAuthority =
+    currentUser.authority === 'super admin' ||
+    currentUser.authority === 'admin' ||
+    currentUser.authority === 'manager' ||
+    currentUser.authority === 'support';
 
   useEffect(() => {
     setHistory(location.pathname);
@@ -41,8 +46,8 @@ const App = () => {
       path,
       currentUser.uid,
       urlHistory,
-      "/home",
-      "/",
+      '/home',
+      '/'
     );
   };
 
@@ -53,8 +58,8 @@ const App = () => {
       path,
       currentUser.uid,
       urlHistory,
-      "/home",
-      "/",
+      '/home',
+      '/'
     );
   };
 
@@ -65,29 +70,29 @@ const App = () => {
       path,
       currentUser.uid,
       urlHistory,
-      "/home",
-      "/",
-      unrestricted,
+      '/home',
+      '/',
+      unrestricted
     );
   };
 
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="home" element={Type2UserRedirect(<Home />, "/home")} />
-        <Route path="shop/*" element={Type2UserRedirect(<Shop />, "/shop")} />
-        <Route index element={Type1UserRedirect(<SignInForm />, "/")} />
+        <Route path="home" element={Type2UserRedirect(<Home />, '/home')} />
+        <Route path="shop/*" element={Type2UserRedirect(<Shop />, '/shop')} />
+        <Route index element={Type1UserRedirect(<SignInForm />, '/')} />
         <Route
           path="/signUp"
-          element={Type1UserRedirect(<SignUpForm />, "/signUp")}
+          element={Type1UserRedirect(<SignUpForm />, '/signUp')}
         />
         <Route
           path="/checkout"
-          element={Type2UserRedirect(<Checkout />, "/checkout")}
+          element={Type2UserRedirect(<Checkout />, '/checkout')}
         />
         <Route
-          path="/admin"
-          element={Type3UserRedirect(<Admin />, "/admin", currentUser.isAdmin)}
+          path="/dashboard"
+          element={Type3UserRedirect(<Admin />, '/dashboard', userHasAuthority)}
         />
         <Route path="/page_not_found" element={<PageNotFound />} />
         <Route path="*" element={<Navigate to="/page_not_found" />} />

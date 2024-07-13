@@ -28,7 +28,6 @@ function Footer() {
     setContentEnough(contentHeight > windowHeight);
   }, [
     location.pathname,
-    window.innerHeight,
     isLoading
   ]);
 

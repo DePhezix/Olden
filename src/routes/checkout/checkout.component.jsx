@@ -1,18 +1,17 @@
-import { useContext } from 'react'
-import { useNavigate } from "react-router-dom";
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { CartContext } from '../../contexts/cart.context'
+import { CartContext } from '../../contexts/cart.context';
 
-import CheckoutItem from '../../components/checkout-item/checkout-item.component'
-import Button from '../../components/button/button.component'
-import { ReactComponent as TrolleySVG } from '../../assets/trolley.svg'
- 
-import './checkout.styles.scss'
+import CheckoutItem from '../../components/checkout-item/checkout-item.component';
+import Button from '../../components/button/button.component';
+
+import './checkout.styles.scss';
 
 function Checkout() {
   const { cartItems, cartTotal } = useContext(CartContext);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div className="checkout-container">
@@ -41,13 +40,13 @@ function Checkout() {
           <span className="total">Total: ${cartTotal} </span>
         </>
       ) : (
-        <div className='empty-checkout-container'>
+        <div className="empty-checkout-container">
           <span>Your Checkout is Empty!</span>
-          <Button onClick={() => navigate("/shop")} >Return to shop?</Button>
+          <Button onClick={() => navigate('/shop')}>Return to shop?</Button>
         </div>
       )}
     </div>
   );
 }
 
-export default Checkout
+export default Checkout;

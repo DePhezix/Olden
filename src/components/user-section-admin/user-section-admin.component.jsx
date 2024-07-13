@@ -54,11 +54,10 @@ function UserSectionForAdmin() {
       <div className="user-cards">
         <AdminCardUser userCreatingCard cardVisible />
         {sortedUsers
-          .filter((userData) => userData.email.includes(userSearch))
           .map((userData) => (
             <AdminCardUser
               userData={userData.email}
-              cardVisible
+              cardVisible={userData.email.includes(userSearch)}
               key={userData.email}
             />
           ))}

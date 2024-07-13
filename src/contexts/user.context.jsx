@@ -1,16 +1,16 @@
-import { createContext, useEffect, useReducer, useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { createContext, useEffect, useReducer, useContext } from 'react';
+import { Navigate } from 'react-router-dom';
 
-import { onAuthStateChange } from "../utils/firebase/firebase-auth.utils";
+import { onAuthStateChange } from '../utils/firebase/firebase-auth.utils';
 import {
   getUsersInfo,
   getUserDocument,
   updateUserDataInDatabase,
-} from "../utils/firebase/firestore.utils";
-import { createAction } from "../utils/reducer/reducer.utils";
+} from '../utils/firebase/firestore.utils';
+import { createAction } from '../utils/reducer/reducer.utils';
 
-import { DataUpdatedContext } from "./dataUpdated.context";
-import { LoadingFeedbackContext } from "./loadingFeedback.context";
+import { DataUpdatedContext } from './dataUpdated.context';
+import { LoadingFeedbackContext } from './loadingFeedback.context';
 
 export const UserRedirect = (
   VariationType,
@@ -51,7 +51,7 @@ export const UserContext = createContext({
     email: null,
     displayName: null,
     uid: null,
-    isAdmin: false,
+    authority: 'None',
   },
   redirect: (...args) => {
     const setLoading = useContext(LoadingFeedbackContext);
@@ -68,8 +68,8 @@ export const UserContext = createContext({
 });
 
 export const USER_ACTION_TYPES = {
-  SET_CURRENT_USER: "SET_CURRENT_USER",
-  SET_ALL_USERS_DATA: "SET_ALL_USERS_DATA",
+  SET_CURRENT_USER: 'SET_CURRENT_USER',
+  SET_ALL_USERS_DATA: 'SET_ALL_USERS_DATA',
 };
 
 const userReducer = (state, action) => {
@@ -114,11 +114,11 @@ export const UserProvider = ({ children }) => {
   const updateUserDatabase = async (user, newDataObj) => {
     await updateUserDataInDatabase(user, newDataObj);
     setUserDataInAdminVersion(userDataInAdminVersion + 1);
-  }
+  };
 
   const setAllUsersData = (usersData) => {
-    dispatch(createAction(USER_ACTION_TYPES.SET_ALL_USERS_DATA, usersData))
-  }
+    dispatch(createAction(USER_ACTION_TYPES.SET_ALL_USERS_DATA, usersData));
+  };
 
   const [{ currentUser, allUsersData }, dispatch] = useReducer(
     userReducer,
@@ -129,7 +129,9 @@ export const UserProvider = ({ children }) => {
     const isUserAdmin = currentUser.isAdmin;
     if (isUserAdmin) {
       const getAllUsersData = async () => {
-        {typeof isSuccessful !== "string" && setIsLoading(true);}
+        {
+          typeof isSuccessful !== 'string' && setIsLoading(true);
+        }
         const usersData = await getUsersInfo();
 
         setAllUsersData(usersData);
@@ -161,7 +163,7 @@ export const UserProvider = ({ children }) => {
     allUsersData,
     redirect,
     updateUserDatabase,
-    setAllUsersData
+    setAllUsersData,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
