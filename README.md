@@ -1,3 +1,9 @@
+V1.3
+Basic Category Management
+Removed user management for redigsn
+Added Navigation for Admin
+Stopping Development of Admin Temporarily
+
 V1.2
 Modified Admin_Card_User Styles
 User Search now disables upon no usage
